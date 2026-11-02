@@ -59,7 +59,7 @@
   <header class="w-full text-center pt-2 pb-4">
     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-stone-900/80 border border-stone-800 mb-2">
       <i class="fa-solid fa-location-dot text-amber-500 text-xs"></i>
-      <span id="locationType" class="text-[10px] tracking-widest uppercase font-bold text-amber-500/90">Ubicación Seleccionada</span>
+      <span id="locationType" class="text-[10px] tracking-widest uppercase font-bold text-amber-500/90">Ubicación GPS</span>
     </div>
     <h1 id="cityName" class="text-2xl sm:text-3xl font-extrabold text-stone-100 tracking-tight leading-tight px-4 truncate">
       Cargando...
@@ -715,20 +715,10 @@
     const searchResults = document.getElementById('searchResults');
     const clearSearchBtn = document.getElementById('clearSearchBtn');
 
-    searchInput.addEventListener('input', (e) => {
-      const query = e.target.value.trim();
-      clearTimeout(searchDebounceTimer);
-
-      if (query.length > 0) {
-        clearSearchBtn.classList.remove('hidden');
-      } else {
-        clearSearchBtn.classList.add('hidden');
-        searchResults.classList.add('hidden');
-        return;
-      }
+    searchInput.addEventListener('input', (e) =>
 
       if (query.length < 2) return;
-
+ferchCitiesFromNominatim(query);
       searchDebounceTimer = setTimeout(() => {
         fetchCitiesFromNominatim(query);
       }, 350);
